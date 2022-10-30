@@ -104,18 +104,31 @@ function enter(){
     text: mensagemEnviar,
     type: "message" // ou "private_message" para o bônus
   }
-  const envioMensagem =axios.post("https://mock-api.driven.com.br/api/v6/uol/messages",objEnviarMensagem);
-  envioMensagem.then(chatAtual);
-  envioMensagem.catch(atualizar);
+  const envioMensagem = axios.post("https://mock-api.driven.com.br/api/v6/uol/messages",objEnviarMensagem);
+   envioMensagem.then(chatAtual);
+   envioMensagem.catch(atualizar);
 }
 
 
 
-let usuario = prompt("Qual o seu nome?");
-
+let usuario = document.querySelector(".logar").value;
 let objUsuario = {
   name:usuario
 };
+
+function criarUsuario(){
+  let usuario = document.querySelector(".logar").value;
+  let objUsuario = {
+    name:usuario
+  };
+}
+
+function entrarChat(){
+  const aparecer = document.querySelector(".escondido");
+  aparecer.classList.remove("escondido");
+  const sumir = document.querySelector(".login");
+  sumir.classList.add("escondido");
+}
 
 const envio = axios.post("https://mock-api.driven.com.br/api/v6/uol/participants", objUsuario);
 
@@ -124,8 +137,8 @@ const participantes = axios.get("https://mock-api.driven.com.br/api/v6/uol/parti
 function repetido(envio){
   console.log(envio.response.status);
   while(envio.response.status === 400){
-    usuario = prompt("Qual o seu nome?");
-    objUsuario = {
+    usuario = document.querySelector(".logar").value;
+    let objUsuario = {
       name:usuario
     };
 
@@ -135,10 +148,23 @@ function repetido(envio){
     }
 }
 
-function login(envio){
-  console.log(envio.status);
+function login(){
+  const aparecer = document.querySelector(".escondido");
+  aparecer.classList.remove("escondido");
+  const sumir = document.querySelector(".login");
+  sumir.classList.add("escondido");
 }
 
+var input = document.querySelector(".enter");
+input.addEventListener("keypress", function(event) {
+  // If the user presses the "Enter" key on the keyboard
+  if (event.key === "Enter") {
+    // Cancel the default action, if needed
+    event.preventDefault();
+    // Trigger the button element with a click
+    document.querySelector(".click").click();
+  }
+});
 envio.then(login);
 envio.catch(repetido);
 
@@ -156,4 +182,3 @@ const refresh = () =>{
   ultimaMensagem.scrollIntoView(false);
 }
 setInterval(refresh,3000);
-
