@@ -104,31 +104,18 @@ function enter(){
     text: mensagemEnviar,
     type: "message" // ou "private_message" para o bônus
   }
-  const envioMensagem = axios.post("https://mock-api.driven.com.br/api/v6/uol/messages",objEnviarMensagem);
-   envioMensagem.then(chatAtual);
-   envioMensagem.catch(atualizar);
+  const envioMensagem =axios.post("https://mock-api.driven.com.br/api/v6/uol/messages",objEnviarMensagem);
+  envioMensagem.then(chatAtual);
+  envioMensagem.catch(atualizar);
 }
 
 
 
-let usuario = document.querySelector(".logar").value;
+let usuario = prompt("Qual o seu nome?");
+
 let objUsuario = {
   name:usuario
 };
-
-function criarUsuario(){
-  let usuario = document.querySelector(".logar").value;
-  let objUsuario = {
-    name:usuario
-  };
-}
-
-function entrarChat(){
-  const aparecer = document.querySelector(".escondido");
-  aparecer.classList.remove("escondido");
-  const sumir = document.querySelector(".login");
-  sumir.classList.add("escondido");
-}
 
 const envio = axios.post("https://mock-api.driven.com.br/api/v6/uol/participants", objUsuario);
 
@@ -137,8 +124,8 @@ const participantes = axios.get("https://mock-api.driven.com.br/api/v6/uol/parti
 function repetido(envio){
   console.log(envio.response.status);
   while(envio.response.status === 400){
-    usuario = document.querySelector(".logar").value;
-    let objUsuario = {
+    usuario = prompt("Qual o seu nome?");
+    objUsuario = {
       name:usuario
     };
 
@@ -148,11 +135,8 @@ function repetido(envio){
     }
 }
 
-function login(){
-  const aparecer = document.querySelector(".escondido");
-  aparecer.classList.remove("escondido");
-  const sumir = document.querySelector(".login");
-  sumir.classList.add("escondido");
+function login(envio){
+  console.log(envio.status);
 }
 
 envio.then(login);
