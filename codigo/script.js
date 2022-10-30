@@ -143,16 +143,21 @@ function repetido(envio){
     };
 
     envio = axios.post("https://mock-api.driven.com.br/api/v6/uol/participants", objUsuario);
-    envio.then(login);
+    envio.then(entrarChat);
     envio.catch(repetido);
     }
 }
 
-function login(){
-  const aparecer = document.querySelector(".escondido");
-  aparecer.classList.remove("escondido");
-  const sumir = document.querySelector(".login");
-  sumir.classList.add("escondido");
+const entrarVerde = () => {
+  let inputLogin = document.querySelector(".logar").value;
+  console.log(inputLogin)
+  const entrar = document.querySelector(".entrar");
+  if (inputLogin.length >= 1){
+    entrar.classList.add("verde");
+  }
+  else{
+    entrar.classList.remove("verde");
+  }
 }
 
 var input = document.querySelector(".enter");
@@ -163,10 +168,10 @@ input.addEventListener("keypress", function(event) {
     event.preventDefault();
     // Trigger the button element with a click
     document.querySelector(".click").click();
+    input.innerHTML = "";
   }
 });
-envio.then(login);
-envio.catch(repetido);
+
 
 const presenca = () =>{
   axios.post("https://mock-api.driven.com.br/api/v6/uol/status", objUsuario);
@@ -181,4 +186,6 @@ const refresh = () =>{
   let ultimaMensagem = elementoQueQueroQueApareca.lastElementChild
   ultimaMensagem.scrollIntoView(false);
 }
+
+setInterval(entrarVerde,300);
 setInterval(refresh,3000);
