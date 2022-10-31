@@ -1,6 +1,9 @@
 div{
     word-wrap: break-word;
 }
+body{
+    position: relative;
+}
 .cabecalho{
     width: 375px;
     height: 80px;
@@ -139,6 +142,71 @@ input{
     top: 327px;
 }
 
+.online{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    position: absolute;
+    width: 259px;
+    height: 667px;
+    right: 0;
+    top: 0;
+    z-index: 1;
+    background: #FFFFFF;
+}
+.online div{
+    width: 259px;
+    height: 84px;
+    
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+.to{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 194px;
+    height: 36px;
+    left: 165px;
+    top: 255px;
+    
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    align-items: center;
+}
+.to div{
+    display: flex;
+    align-items: center;
+}
+
+.pOnline{
+    width: 194px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    display: flex;
+    flex-direction: column;
+}
+.usuarios{
+    height: 30px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+}
 .verde{
     background: greenyellow;
 }

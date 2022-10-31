@@ -97,7 +97,6 @@ const atualizar = () =>window.location.reload();
 
 function enter(){
   let mensagemEnviar = document.querySelector(".enter").value;
-
   let objEnviarMensagem = {
     from: usuario,
     to: "Todos",
@@ -105,9 +104,20 @@ function enter(){
     type: "message" // ou "private_message" para o bônus
   }
   const envioMensagem = axios.post("https://mock-api.driven.com.br/api/v6/uol/messages",objEnviarMensagem);
-   envioMensagem.then(chatAtual);
-   envioMensagem.catch(atualizar);
+  envioMensagem.then(chatAtual);
+  envioMensagem.catch(atualizar);
 }
+
+var input = document.querySelector(".enter");
+input.addEventListener("keypress", function(event) {
+  // If the user presses the "Enter" key on the keyboard
+  if (event.key === "Enter") {
+    // Cancel the default action, if needed
+    event.preventDefault();
+    // Trigger the button element with a click
+    document.querySelector(".click").click();
+  }
+});
 
 
 
@@ -117,10 +127,13 @@ let objUsuario = {
 };
 
 function criarUsuario(){
-  let usuario = document.querySelector(".logar").value;
-  let objUsuario = {
+  usuario = document.querySelector(".logar").value;
+  objUsuario = {
     name:usuario
   };
+  const envio = axios.post("https://mock-api.driven.com.br/api/v6/uol/participants", objUsuario);
+  envio.then(entrarChat);
+  envio.catch(repetido);
 }
 
 function entrarChat(){
@@ -130,21 +143,54 @@ function entrarChat(){
   sumir.classList.add("escondido");
 }
 
-const envio = axios.post("https://mock-api.driven.com.br/api/v6/uol/participants", objUsuario);
 
+let listParticipantes =[];
 const participantes = axios.get("https://mock-api.driven.com.br/api/v6/uol/participants");
+
+
+participantes.then(carregarParticipantes);
+participantes.catch(tratarErro);
+
+
+
+
+
+function carregarParticipantes(resposta) {
+  listParticipantes = resposta.data;
+  console.log(listParticipantes);
+  renderizarParticipantes(listParticipantes);
+  console.log(renderizarMensagens);
+  setInterval(carregarParticipantes,1000);
+}
+
+function renderizarParticipantes(participantes) {
+  let online = document.querySelector(".pOnline").value;
+  console.log(online)
+  online = "";
+
+  for (let i = 0; i < participantes.length; i++) {
+    const participante = participantes[i];
+    online += ParticipanteDiv(participante);
+  }
+}
+
+function ParticipanteDiv(participante) {
+    listParticipantes.innerHTML += `
+    <section class="usuarios"><ion-icon name="people"></ion-icon>${participante.name}</section>
+      `;}
+
+
 
 function repetido(envio){
   console.log(envio.response.status);
+  
   while(envio.response.status === 400){
     usuario = document.querySelector(".logar").value;
     let objUsuario = {
       name:usuario
     };
-
+    alert("Escolha outro nome!");
     envio = axios.post("https://mock-api.driven.com.br/api/v6/uol/participants", objUsuario);
-    envio.then(entrarChat);
-    envio.catch(repetido);
     }
 }
 
@@ -159,18 +205,6 @@ const entrarVerde = () => {
     entrar.classList.remove("verde");
   }
 }
-
-var input = document.querySelector(".enter");
-input.addEventListener("keypress", function(event) {
-  // If the user presses the "Enter" key on the keyboard
-  if (event.key === "Enter") {
-    // Cancel the default action, if needed
-    event.preventDefault();
-    // Trigger the button element with a click
-    document.querySelector(".click").click();
-    input.innerHTML = "";
-  }
-});
 
 
 const presenca = () =>{

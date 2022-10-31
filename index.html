@@ -10,15 +10,32 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="login">
+    <div class="login escondido">
         <img src="imagens/logo 2.png">
         <input class="logar" type="text" placeholder="Digite seu nome" data-identifier="enter-name">
-        <div onclick="criarUsuario(); entrarChat();" class="entrar" data-identifier="start" >Entrar</div>
+        <div onclick="criarUsuario()" class="entrar" data-identifier="start" >Entrar</div>
     </div>
-    <div class="escondido">
+    <div class="online">
+        <div>Escolha um contato para enviar mensagem:</div>
+        <section class="pOnline">
+            <section class="usuarios"><ion-icon name="people"></ion-icon>Todos</section>
+        </section>
+        <div>Escolha a visibilidade:</div>
+        <div class="to">
+            <div>
+                <ion-icon name="lock-open-sharp"></ion-icon>
+                <span>Público</span>
+            </div>
+            <div>
+                <ion-icon name="lock-closed-sharp"></ion-icon>
+                <span>Reservadamente</span>
+            </div>
+        </div>
+    </div>
+    <div class="">
         <header class="cabecalho">
             <img src="imagens/logo 1.png">
-            <ion-icon name="people"></ion-icon>
+            <ion-icon class="participantes" onclick="participantes()"name="people"></ion-icon>
         </header>
         <main class="chat">
         </main>
