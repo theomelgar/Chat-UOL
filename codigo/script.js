@@ -121,11 +121,21 @@ input.addEventListener("keypress", function(event) {
   }
 });
 
-
+let aviso = document.querySelector(".enviar");
+aviso.innerHTML=""
+  aviso.innerHTML = `<input class="enter"type="text" name="escrever" placeholder="Escreva aqui...">
+  <ion-icon onclick="enter()" class="click" name="paper-plane-outline"></ion-icon>
+  <div class="aviso">Enviando para ${destino}</div>
+  `;
+console.log(aviso.innerHTML);
 
 const paraQuem = () =>{
   destino = prompt("Para quem voce deseja mandar mensagem?");
-  return destino;
+  aviso.innerHTML=""
+  aviso.innerHTML = `<input class="enter"type="text" name="escrever" placeholder="Escreva aqui...">
+  <ion-icon onclick="enter()" class="click" name="paper-plane-outline"></ion-icon>
+  <div class="aviso">Enviando para ${destino}</div>
+  `;
 }
 
 
