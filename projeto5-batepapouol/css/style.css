@@ -1,0 +1,148 @@
+div{
+    word-wrap: break-word;
+}
+.cabecalho{
+    width: 375px;
+    height: 80px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.05);
+    font-size: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.chat{
+    width: 375px;
+    height: 507px;
+    padding: 20px 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    background-color: #F3F3F3;
+    overflow: scroll;
+}
+.click{
+    cursor: pointer;
+}
+.enviar{
+    width: 375px;
+    height: 80px;
+    background: #FFFFFF;
+    font-size: 30px;
+    box-shadow: 0px -4px 6px rgba(0, 0, 0, 0.05);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.mensagem{
+    margin: 2px 0;
+}
+
+.time{
+    opacity: 0.6;
+}
+
+.from,.to{
+    font-family: 'Roboto';
+    font-weight: 700;
+}
+
+
+.mensagemT{
+    height: fit-content;
+    padding: 7px 0;
+    box-sizing: border-box;
+    background-color: white;
+    border-radius: 2px;
+}
+.mensagemR{
+    height: fit-content;
+    padding: 7px 0;
+    box-sizing: border-box;
+    background: #FFDEDE;
+    border-radius: 2px;
+}
+
+.mensagemS{
+    height: fit-content;
+    padding: 7px 0;
+    box-sizing: border-box;
+    background-color: #DCDCDC;
+    border-radius: 2px;
+}
+
+input{
+    border: #FFFFFF;
+    width: 290px;
+    height: 30px;
+    font-family: 'Roboto';
+    font-style: italic;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 21px;
+    display: flex;
+    align-items: center;
+    color: #000000;
+}
+.login{
+    width: 375px;
+    height: 667px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    position: relative;
+}
+.login input{
+    position: absolute;
+    width: 260px;
+    height: 54px;
+    left: 58px;
+    top: 258px;
+    
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 25px;
+    
+    /* or 139% */
+    display: flex;
+    align-items: center;
+    text-align: center;
+    
+    color: #AEAEAE;
+}
+.login img{
+    position: absolute;
+    width: 130px;
+    height: 92px;
+    left: 122px;
+    top: 72px;    
+}
+.entrar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #E7E7E7;
+    border-radius: 9px;;
+    position: absolute;
+    width: 109px;
+    height: 45px;
+    left: 133px;
+    top: 327px;
+}
+
+.verde{
+    background: greenyellow;
+}
+
+.escondido{
+    display: none;
+}
