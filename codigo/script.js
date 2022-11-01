@@ -54,7 +54,7 @@ function MensagemDiv(mensagem) {
   //     </div>
   //   </div>
   //     `;}
-  else if(mensagem.to === usuario){
+  else if(mensagem.to !== "Todos" && (mensagem.to === usuario || mensagem.from === usuario)){
     return `
     <div class="mensagem">
       <div class="mensagemR">  
@@ -95,69 +95,19 @@ const chatAtual = () => {
 
 const atualizar = () =>window.location.reload();
 
+let destino ="Todos";
+
 function enter(){
   let mensagemEnviar = document.querySelector(".enter").value;
-
   let objEnviarMensagem = {
     from: usuario,
-    to: "Todos",
+    to: destino,
     text: mensagemEnviar,
     type: "message" // ou "private_message" para o bônus
   }
-  const envioMensagem = axios.post("https://mock-api.driven.com.br/api/v6/uol/messages",objEnviarMensagem);
-   envioMensagem.then(chatAtual);
-   envioMensagem.catch(atualizar);
-}
-
-
-
-let usuario = document.querySelector(".logar").value;
-let objUsuario = {
-  name:usuario
-};
-
-function criarUsuario(){
-  let usuario = document.querySelector(".logar").value;
-  let objUsuario = {
-    name:usuario
-  };
-}
-
-function entrarChat(){
-  const aparecer = document.querySelector(".escondido");
-  aparecer.classList.remove("escondido");
-  const sumir = document.querySelector(".login");
-  sumir.classList.add("escondido");
-}
-
-const envio = axios.post("https://mock-api.driven.com.br/api/v6/uol/participants", objUsuario);
-
-const participantes = axios.get("https://mock-api.driven.com.br/api/v6/uol/participants");
-
-function repetido(envio){
-  console.log(envio.response.status);
-  while(envio.response.status === 400){
-    usuario = document.querySelector(".logar").value;
-    let objUsuario = {
-      name:usuario
-    };
-
-    envio = axios.post("https://mock-api.driven.com.br/api/v6/uol/participants", objUsuario);
-    envio.then(entrarChat);
-    envio.catch(repetido);
-    }
-}
-
-const entrarVerde = () => {
-  let inputLogin = document.querySelector(".logar").value;
-  console.log(inputLogin)
-  const entrar = document.querySelector(".entrar");
-  if (inputLogin.length >= 1){
-    entrar.classList.add("verde");
-  }
-  else{
-    entrar.classList.remove("verde");
-  }
+  const envioMensagem =axios.post("https://mock-api.driven.com.br/api/v6/uol/messages",objEnviarMensagem);
+  envioMensagem.then(chatAtual);
+  envioMensagem.catch(atualizar);
 }
 
 var input = document.querySelector(".enter");
@@ -168,10 +118,57 @@ input.addEventListener("keypress", function(event) {
     event.preventDefault();
     // Trigger the button element with a click
     document.querySelector(".click").click();
-    input.innerHTML = "";
   }
 });
 
+let aviso = document.querySelector(".enviar");
+aviso.innerHTML=""
+  aviso.innerHTML = `<input class="enter"type="text" name="escrever" placeholder="Escreva aqui...">
+  <ion-icon onclick="enter()" class="click" name="paper-plane-outline"></ion-icon>
+  <div class="aviso">Enviando para ${destino}</div>
+  `;
+console.log(aviso.innerHTML);
+
+const paraQuem = () =>{
+  destino = prompt("Para quem voce deseja mandar mensagem?");
+  aviso.innerHTML=""
+  aviso.innerHTML = `<input class="enter"type="text" name="escrever" placeholder="Escreva aqui...">
+  <ion-icon onclick="enter()" class="click" name="paper-plane-outline"></ion-icon>
+  <div class="aviso">Enviando para ${destino}</div>
+  `;
+}
+
+
+let usuario = prompt("Qual o seu nome?");
+
+let objUsuario = {
+  name:usuario
+};
+
+const envio = axios.post("https://mock-api.driven.com.br/api/v6/uol/participants", objUsuario);
+
+const participantes = axios.get("https://mock-api.driven.com.br/api/v6/uol/participants");
+
+function repetido(envio){
+  console.log(envio.response.status);
+  while(envio.response.status === 400){
+    usuario = prompt("Qual o seu nome?");
+    objUsuario = {
+      name:usuario
+    };
+
+    envio = axios.post("https://mock-api.driven.com.br/api/v6/uol/participants", objUsuario);
+    envio.then(login);
+    envio.catch(repetido);
+    }
+}
+
+function login(envio){
+  console.log(envio.status);
+}
+
+envio.then(login);
+envio.catch(repetido);
 
 const presenca = () =>{
   axios.post("https://mock-api.driven.com.br/api/v6/uol/status", objUsuario);
@@ -186,6 +183,4 @@ const refresh = () =>{
   let ultimaMensagem = elementoQueQueroQueApareca.lastElementChild
   ultimaMensagem.scrollIntoView(false);
 }
-
-setInterval(entrarVerde,300);
 setInterval(refresh,3000);

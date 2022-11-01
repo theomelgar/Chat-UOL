@@ -38,6 +38,7 @@ div{
     align-items: center;
     padding: 0 20px;
     box-sizing: border-box;
+    position: relative;
 }
 
 .mensagem{
@@ -139,8 +140,11 @@ input{
     top: 327px;
 }
 
-.verde{
-    background: greenyellow;
+.aviso{
+    position: absolute;
+    font-size: 15px;
+    bottom: 2px;
+    right: 50%;
 }
 
 .escondido{

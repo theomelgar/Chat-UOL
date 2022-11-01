@@ -10,15 +10,15 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="login">
+    <div class="login escondido">
         <img src="imagens/logo 2.png">
         <input class="logar" type="text" placeholder="Digite seu nome" data-identifier="enter-name">
-        <div onclick="criarUsuario(); entrarChat();" class="entrar" data-identifier="start" >Entrar</div>
+        <div onclick="criarUsuario(); enviarDados();" class="entrar" data-identifier="start" >Entrar</div>
     </div>
-    <div class="escondido">
+    <div class="">
         <header class="cabecalho">
             <img src="imagens/logo 1.png">
-            <ion-icon name="people"></ion-icon>
+            <ion-icon onclick="paraQuem()"name="people"></ion-icon>
         </header>
         <main class="chat">
         </main>
